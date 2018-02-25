@@ -27,7 +27,7 @@ public class CameraHolder : MonoBehaviour {
             transform.eulerAngles = new Vector3(Mathf.Clamp(transform.eulerAngles.x - vertical_speed * Input.GetAxisRaw("Mouse Y"),38,85),
                 transform.eulerAngles.y + vertical_speed * Input.GetAxisRaw("Mouse X"), 0);
         }
-
+    /*
         if (Input.GetKeyDown("w"))
         {
             distance += buchang;
@@ -38,5 +38,6 @@ public class CameraHolder : MonoBehaviour {
             distance -= buchang;
             camera_transform.position = new Vector3(0, 0, distance);
         }
+        */
     }
 }

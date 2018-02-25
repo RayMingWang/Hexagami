@@ -8,23 +8,35 @@ public class HexTile : MonoBehaviour {
     public int rearTarget;
     public int currentTarget;
 
+    //鼠标放上去查看用的
     public float lookangle = 50.0f;
-    public float lookOpenTime=0.7f;
+    public float lookOpenTime = 0.7f;
     public float lookCloseTime = 0.4f;
+    //---用来设置放下时间的
     public float looktimer = 2.0f;
-    private float looktimer_real=0;
-
-    private bool mouseDown = false;
+    //---真正的Timer
+    private float looktimer_real = 0;
+    //鼠标放上去查看用的
+    [SerializeField]
+    private bool mouseEnter = false;
+    [SerializeField]
     private bool mouseUpStart = true;
-	void Start () {
-		
-	}
+
+    //鼠标点进去的
+    public float fliptime = 0.5f;
+    [SerializeField]
+    private bool mouseDown = false;
+
+    private float lastcurrent;
+    void Start() {
+
+    }
     private void OnMouseEnter()
     {
         Debug.Log("Enter");
         looktimer_real = looktimer;
         mouseUpStart = false;
-        mouseDown = true;
+        mouseEnter = true;
     }
     private void OnMouseExit()
     {
@@ -33,23 +45,61 @@ public class HexTile : MonoBehaviour {
         //mouseDown = false;
 
     }
-    // Update is called once per frame
-    void Update () {
 
-        if (looktimer_real <= 0&&mouseDown)
-            mouseDown = false;
+    private void OnMouseDown()
+    {
+        mouseDown = true;
+    }
+
+
+
+    // Update is called once per frame
+    void Update() {
+        float new_rotation = 0f;
+        float new_time = 0f;
+        float new_start = 0f;
+
+
+        if (Input.GetKeyDown("w"))
+        {
+            parent.eulerAngles = new Vector3(testlerp(parent.rotation.x) -150f, 0, 0);
+        }
+
+
+        //When flip
+        if (mouseDown)
+        {
+            if (frontTarget == currentTarget)
+            {
+                new_start = 0.0f;
+                new_rotation = -180f;
+                new_time = fliptime;
+                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+            }
+            else
+            {
+                new_start = -180.0f;
+                new_rotation = 0f;
+                new_time = fliptime;
+                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+            }
+            return;
+        }
+
+        // Look Timer Fire
+        if (looktimer_real <= 0 && mouseEnter)
+            mouseEnter = false;
         else
         {
-            if (looktimer_real > 0&& mouseUpStart)
+            if (looktimer_real > 0 && mouseUpStart)
             {
                 looktimer_real -= Time.deltaTime;
             }
         }
 
-        float new_rotation=0f;
-        float new_time=0f;
-        float new_start = 0f;
-        if (mouseDown)
+
+        //When higlihted;
+        if (mouseEnter)
         {
             if (frontTarget == currentTarget)
             {
@@ -83,10 +133,14 @@ public class HexTile : MonoBehaviour {
                 parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
             }
         }
-        
+
+
+
     }
 
-    private float LookCloseLerpbyProgress(float start,float end,float time, float current,float deltaTime)
+
+
+    private float LookCloseLerpbyProgress(float start, float end, float time, float current, float deltaTime)
     {
         //Debug.Log("current");
         if (current > 180f)
@@ -94,8 +148,8 @@ public class HexTile : MonoBehaviour {
             current -= 360f;
         }
         //Debug.Log(current);
-        float speed_modifer= (0.4f +3.5f*(current - start) / (end-start));
-        float new_current = current + speed_modifer * ((end-start) / time) * deltaTime;
+        float speed_modifer = (0.4f + 3.5f * (lastcurrent - start) / (end - start));
+        float new_current = lastcurrent + speed_modifer * ((end - start) / time) * deltaTime;
         if (start > end)
         {
             if (new_current < end)
@@ -108,6 +162,7 @@ public class HexTile : MonoBehaviour {
         }
         //Debug.Log("new_current");
         //Debug.Log(new_current);
+        lastcurrent = new_current;
         return new_current;
 
     }
@@ -119,8 +174,8 @@ public class HexTile : MonoBehaviour {
             current -= 360f;
         }
         //Debug.Log(current);
-        float speed_modifer = (2f- 2f * (current - start) / (end - start));
-        float new_current = current + speed_modifer * ((end - start) / time) * deltaTime;
+        float speed_modifer = (2f - 2f * (lastcurrent - start) / (end - start));
+        float new_current = lastcurrent + speed_modifer * ((end - start) / time) * deltaTime;
         if (start > end)
         {
             if (new_current < end)
@@ -133,7 +188,71 @@ public class HexTile : MonoBehaviour {
         }
         //Debug.Log("new_current");
         //Debug.Log(new_current);
+        lastcurrent = new_current;
         return new_current;
 
+    }
+
+    private float FlipLerpbyProgress(float start, float end, float time, float current, float deltaTime)
+    {
+        Debug.Log("current");
+        if (current > 180f)
+        {
+            current -= 360f;
+        }
+        Debug.Log(current);
+
+        if (Mathf.Abs(lastcurrent - current) > 1)
+        {
+            Debug.Log(lastcurrent);
+            Debug.Log(current);
+        }
+
+        Debug.Log("speedmodifer");
+        float speed_modifer = (0.4f + 1.5f * (lastcurrent - start) / (end - start));
+        Debug.Log(speed_modifer);
+        float new_current = lastcurrent + speed_modifer * ((end - start) / time) * deltaTime;
+        if (start > end)
+        {
+            if (new_current < end)
+            {
+                new_current = end;
+                mouseDown = false;
+                mouseEnter = false;
+                mouseUpStart = true;
+                currentTarget = rearTarget;
+            }
+
+
+        }
+        if (start < end)
+        {
+            if (new_current > end)
+            {
+                new_current = end;
+                mouseDown = false;
+                mouseEnter = false;
+                mouseUpStart = true;
+                currentTarget = frontTarget;
+            }
+
+        }
+        Debug.Log("new_current");
+        Debug.Log(new_current);
+        lastcurrent = new_current;
+        return new_current;
+
+    }
+
+    private float testlerp(float current){
+        Debug.Log("rawcurrent");
+        Debug.Log(current);
+        Debug.Log("current");
+        if (current > 180f)
+        {
+            current -= 360f;
+        }
+        Debug.Log(current);
+        return current;
     }
 }
