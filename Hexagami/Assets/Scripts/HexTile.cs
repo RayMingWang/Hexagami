@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HexTile : MonoBehaviour {
-    public Transform parent;
+    public Transform axle;
     public int frontTarget;
     public int rearTarget;
     public int currentTarget;
@@ -75,14 +75,14 @@ public class HexTile : MonoBehaviour {
                 new_start = 0.0f;
                 new_rotation = -180f;
                 new_time = fliptime;
-                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), parent.eulerAngles.y, 0);
             }
             else
             {
                 new_start = -180.0f;
                 new_rotation = 0f;
                 new_time = fliptime;
-                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), parent.eulerAngles.y, 0);
             }
             return;
         }
@@ -107,14 +107,14 @@ public class HexTile : MonoBehaviour {
                 new_start = 0.0f;
                 new_rotation = -lookangle;
                 new_time = lookOpenTime;
-                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), parent.eulerAngles.y, 0);
             }
             else
             {
                 new_start = -180.0f;
                 new_rotation = lookangle - 180.0f;
                 new_time = lookOpenTime;
-                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), parent.eulerAngles.y, 0);
             }
         }
         else
@@ -124,14 +124,14 @@ public class HexTile : MonoBehaviour {
                 new_start = -lookangle;
                 new_rotation = 0.0f;
                 new_time = lookCloseTime;
-                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.localEulerAngles.x, Time.deltaTime), parent.eulerAngles.y, 0);
             }
             else
             {
                 new_start = lookangle - 180.0f;
                 new_rotation = -180.0f;
                 new_time = lookCloseTime;
-                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.localEulerAngles.x, Time.deltaTime), parent.eulerAngles.y, 0);
             }
         }
 
