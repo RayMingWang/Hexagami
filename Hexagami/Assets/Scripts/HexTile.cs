@@ -27,9 +27,10 @@ public class HexTile : MonoBehaviour {
     [SerializeField]
     private bool mouseDown = false;
 
-    private float lastcurrent;
+    private float lastcurrent=-180f;
     void Start() {
-
+        if (frontTarget == currentTarget)
+            lastcurrent = 0f;
     }
     private void OnMouseEnter()
     {
