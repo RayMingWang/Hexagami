@@ -59,11 +59,12 @@ public class HexTile : MonoBehaviour {
         float new_time = 0f;
         float new_start = 0f;
 
-
+        /*
         if (Input.GetKeyDown("w"))
         {
             parent.eulerAngles = new Vector3(testlerp(parent.rotation.x) -150f, 0, 0);
         }
+        */
 
 
         //When flip
