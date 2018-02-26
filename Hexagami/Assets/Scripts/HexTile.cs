@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HexTile : MonoBehaviour {
     public Transform parent;
+    public TileHolder holder;
+    public float yRotation;
+    public int hex_tile_tag;
     public int frontTarget;
     public int rearTarget;
     public int currentTarget;
@@ -34,6 +37,9 @@ public class HexTile : MonoBehaviour {
     }
     private void OnMouseEnter()
     {
+        if (!check_under())
+            return;
+
         Debug.Log("Enter");
         looktimer_real = looktimer;
         mouseUpStart = false;
@@ -41,6 +47,10 @@ public class HexTile : MonoBehaviour {
     }
     private void OnMouseExit()
     {
+        
+        if (!check_under())
+            return;
+            
         Debug.Log("Exit");
         mouseUpStart = true;
         //mouseDown = false;
@@ -49,6 +59,16 @@ public class HexTile : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        if (!check_under())
+            return;
+
+        if (currentTarget == rearTarget)
+            holder.add_holder(hex_tile_tag,frontTarget);
+        else
+            holder.add_holder(hex_tile_tag, rearTarget);
+
+
+
         mouseDown = true;
     }
 
@@ -76,14 +96,14 @@ public class HexTile : MonoBehaviour {
                 new_start = 0.0f;
                 new_rotation = -180f;
                 new_time = fliptime;
-                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), yRotation, 0);
             }
             else
             {
                 new_start = -180.0f;
                 new_rotation = 0f;
                 new_time = fliptime;
-                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(FlipLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), yRotation, 0);
             }
             return;
         }
@@ -108,14 +128,14 @@ public class HexTile : MonoBehaviour {
                 new_start = 0.0f;
                 new_rotation = -lookangle;
                 new_time = lookOpenTime;
-                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), yRotation, 0);
             }
             else
             {
                 new_start = -180.0f;
                 new_rotation = lookangle - 180.0f;
                 new_time = lookOpenTime;
-                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookOpenLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), yRotation, 0);
             }
         }
         else
@@ -125,14 +145,14 @@ public class HexTile : MonoBehaviour {
                 new_start = -lookangle;
                 new_rotation = 0.0f;
                 new_time = lookCloseTime;
-                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), yRotation, 0);
             }
             else
             {
                 new_start = lookangle - 180.0f;
                 new_rotation = -180.0f;
                 new_time = lookCloseTime;
-                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), 0, 0);
+                parent.eulerAngles = new Vector3(LookCloseLerpbyProgress(new_start, new_rotation, new_time, parent.eulerAngles.x, Time.deltaTime), yRotation, 0);
             }
         }
 
@@ -222,7 +242,10 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
+                holder.leave_holder(hex_tile_tag, currentTarget);
                 currentTarget = rearTarget;
+                
+                
             }
 
 
@@ -235,6 +258,7 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
+                holder.leave_holder(hex_tile_tag, currentTarget);
                 currentTarget = frontTarget;
             }
 
@@ -257,4 +281,17 @@ public class HexTile : MonoBehaviour {
         Debug.Log(current);
         return current;
     }
+
+    private bool check_under()
+    {
+        return false;
+        return holder.check_under(hex_tile_tag,currentTarget);
+    }
+
+    public void foldflat()
+    {
+        mouseEnter = false;
+    }
 }
+
+
