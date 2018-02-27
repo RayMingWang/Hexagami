@@ -284,7 +284,7 @@ public class HexTile : MonoBehaviour {
 
     private bool check_under()
     {
-        return false;
+        //return false;
         return holder.check_under(hex_tile_tag,currentTarget);
     }
 
