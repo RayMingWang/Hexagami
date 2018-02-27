@@ -292,6 +292,16 @@ public class HexTile : MonoBehaviour {
     {
         mouseEnter = false;
     }
+
+    public void getCovered()
+    {
+        transform.position -= new Vector3(0, 0.01f, 0);
+    }
+
+    public void returntoTop()
+    {
+        transform.position += new Vector3(0, 0.01f, 0);
+    }
 }
 
 

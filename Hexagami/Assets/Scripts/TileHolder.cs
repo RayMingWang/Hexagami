@@ -27,7 +27,12 @@ public class TileHolder : MonoBehaviour {
     public void leave_holder(int tag, int target)
     {
         ArrayList temp = (ArrayList)map[target];
-        temp.Remove(temp.Count);
+        temp.Remove(temp[temp.Count-1]);
+        if (temp.Count != 0)
+        {
+            HexTile toptile = (HexTile)temp[temp.Count - 1];
+            toptile.returntoTop();
+        }
     }
 
     public void add_holder(int tag, int target)
@@ -37,6 +42,7 @@ public class TileHolder : MonoBehaviour {
         {
             HexTile toptile = (HexTile)temp[temp.Count-1];
             toptile.foldflat();
+            toptile.getCovered();
         }
 
         temp.Add(Tile_list[tag]);
