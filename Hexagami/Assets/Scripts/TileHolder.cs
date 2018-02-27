@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileHolder : MonoBehaviour {
     public HexTile[] Tile_list;
+    private bool[] move_state = new bool[18];
      ArrayList map =new ArrayList();
 	// Use this for initialization
 	void Start () {
@@ -11,6 +12,7 @@ public class TileHolder : MonoBehaviour {
         for(int i = 0; i < 18; i++)
         {
             map.Add(new ArrayList());
+            move_state[i] = false;
         }
 
         add_holder(0,8);
@@ -24,25 +26,27 @@ public class TileHolder : MonoBehaviour {
 		
 	}
 
-    public void leave_holder(int tag, int target)
+    public void leave_holder(int tag, int target,int front,int rear)
     {
         ArrayList temp = (ArrayList)map[target];
+        
         temp.Remove(temp[temp.Count-1]);
-        if (temp.Count != 0)
+        foreach (HexTile i in temp)
         {
-            HexTile toptile = (HexTile)temp[temp.Count - 1];
-            toptile.returntoTop();
+            i.returntoTop();
         }
+        move_state[front] = false;
+        move_state[rear] = false;
+
     }
 
     public void add_holder(int tag, int target)
     {
         ArrayList temp = (ArrayList)map[target];
-        if (temp.Count != 0)
+        foreach (HexTile i in temp)
         {
-            HexTile toptile = (HexTile)temp[temp.Count-1];
-            toptile.foldflat();
-            toptile.getCovered();
+            i.foldflat();
+            i.getCovered();
         }
 
         temp.Add(Tile_list[tag]);
@@ -59,5 +63,17 @@ public class TileHolder : MonoBehaviour {
         }
            
         return false;
+    }
+
+    public bool check_moving(int front,int rear)
+    {
+        if(move_state[front]||move_state[rear])
+        {
+            return false;
+        }
+
+        move_state[front] = true;
+        move_state[rear] = true;
+        return true;
     }
 }

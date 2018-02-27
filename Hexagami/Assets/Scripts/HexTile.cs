@@ -217,22 +217,17 @@ public class HexTile : MonoBehaviour {
 
     private float FlipLerpbyProgress(float start, float end, float time, float current, float deltaTime)
     {
-        Debug.Log("current");
+        //Debug.Log("current");
         if (current > 180f)
         {
             current -= 360f;
         }
-        Debug.Log(current);
+        //Debug.Log(current);
 
-        if (Mathf.Abs(lastcurrent - current) > 1)
-        {
-            Debug.Log(lastcurrent);
-            Debug.Log(current);
-        }
-
-        Debug.Log("speedmodifer");
+        
+        //Debug.Log("speedmodifer");
         float speed_modifer = (0.4f + 1.5f * (lastcurrent - start) / (end - start));
-        Debug.Log(speed_modifer);
+        //Debug.Log(speed_modifer);
         float new_current = lastcurrent + speed_modifer * ((end - start) / time) * deltaTime;
         if (start > end)
         {
@@ -242,7 +237,7 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
-                holder.leave_holder(hex_tile_tag, currentTarget);
+                holder.leave_holder(hex_tile_tag, currentTarget , frontTarget, rearTarget);
                 currentTarget = rearTarget;
                 
                 
@@ -258,27 +253,27 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
-                holder.leave_holder(hex_tile_tag, currentTarget);
+                holder.leave_holder(hex_tile_tag, currentTarget,frontTarget,rearTarget);
                 currentTarget = frontTarget;
             }
 
         }
-        Debug.Log("new_current");
-        Debug.Log(new_current);
+        //Debug.Log("new_current");
+        //Debug.Log(new_current);
         lastcurrent = new_current;
         return new_current;
 
     }
 
     private float testlerp(float current){
-        Debug.Log("rawcurrent");
-        Debug.Log(current);
-        Debug.Log("current");
+       //Debug.Log("rawcurrent");
+        //Debug.Log(current);
+        //Debug.Log("current");
         if (current > 180f)
         {
             current -= 360f;
         }
-        Debug.Log(current);
+        //Debug.Log(current);
         return current;
     }
 
