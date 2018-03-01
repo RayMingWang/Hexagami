@@ -5,11 +5,13 @@ using UnityEngine;
 public class HexTile : MonoBehaviour {
     public Transform parent;
     public TileHolder holder;
+    public Token token;
     public float yRotation;
     public int hex_tile_tag;
     public int frontTarget;
     public int rearTarget;
     public int currentTarget;
+
 
     //鼠标放上去查看用的
     public float lookangle = 50.0f;
@@ -37,10 +39,11 @@ public class HexTile : MonoBehaviour {
     }
     private void OnMouseEnter()
     {
+        //GetComponent<Renderer>().material.shader = Shader.Find("Self-Illumin/Outlined Diffuse");
         if (!check_under())
             return;
 
-        Debug.Log("Enter");
+        //Debug.Log("Enter");
         looktimer_real = looktimer;
         mouseUpStart = false;
         mouseEnter = true;
@@ -51,7 +54,7 @@ public class HexTile : MonoBehaviour {
         if (!check_under())
             return;
             
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
         mouseUpStart = true;
         //mouseDown = false;
 
@@ -66,9 +69,6 @@ public class HexTile : MonoBehaviour {
             holder.add_holder(hex_tile_tag,frontTarget);
         else
             holder.add_holder(hex_tile_tag, rearTarget);
-
-
-
         mouseDown = true;
     }
 

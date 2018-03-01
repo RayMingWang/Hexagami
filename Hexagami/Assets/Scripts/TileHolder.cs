@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class TileHolder : MonoBehaviour {
     public HexTile[] Tile_list;
-    private bool[] move_state = new bool[18];
+    private bool[] move_state = new bool[20];
      ArrayList map =new ArrayList();
-	// Use this for initialization
+    // Use this for initialization
+
+    private bool recover_state = false;
 	void Start () {
 
-        for(int i = 0; i < 18; i++)
+        for(int i = 0; i < 20; i++)
         {
             map.Add(new ArrayList());
             move_state[i] = false;
         }
-
+        
         add_holder(0,8);
         add_holder(1, 9);
         add_holder(2, 9);
+
+        add_holder(3, 11);
+        add_holder(4, 6);
+        add_holder(5, 15);
+        add_holder(6, 2);
+        add_holder(7,18);
+        add_holder(8, 5);
+        add_holder(9, 14);
+        add_holder(10, 19);
+        add_holder(11, 5);
+        add_holder(12, 7);
 
     }
 	
@@ -37,6 +50,75 @@ public class TileHolder : MonoBehaviour {
         }
         move_state[front] = false;
         move_state[rear] = false;
+
+
+        //for token Transfer
+        int new_target;
+        if (target == front)
+        {
+            new_target = rear;
+        }
+        else
+        {
+            new_target = front;
+        }
+
+        if (Tile_list[tag].token == null)
+        {
+            Debug.Log("There is no token");
+            return;
+        }
+            temp = (ArrayList)map[new_target];
+        if (temp.Count >1)
+        {
+            HexTile newland = (HexTile)temp[temp.Count - 2];
+           
+            Tile_list[newland.hex_tile_tag].token = Tile_list[tag].token;
+            Tile_list[tag].token.tile = Tile_list[newland.hex_tile_tag];
+            Tile_list[tag].token = null;
+            /*
+            newland.token = Tile_list[tag].token;
+            Tile_list[tag].token.tile = newland;
+            Tile_list[tag].token = null;
+            */
+            
+            
+            
+
+        }
+        else
+        {
+            //if token land in a blank space
+            Debug.Log("Reeeeeeeee");
+            
+            recover_state = true;
+            switch (Tile_list[tag].token.token_tag)
+            {
+                case 0:
+                    if (Tile_list[0].currentTarget == 8)
+                    {
+                        Tile_list[0].token = Tile_list[tag].token;
+                        Tile_list[tag].token.tile = Tile_list[0];
+                        recover_state = false;
+                        
+                    }
+                    else
+                    {
+                        temp = (ArrayList)map[new_target];
+                        int listcount = temp.Count;
+                        for(int i = listcount - 1; i >= 0; i--)
+                        {
+
+                            //HexTile temptile = 
+                        }
+                    }
+                    Tile_list[tag].token = null;
+                    break;
+                default:
+                    break;
+            }
+                
+        }
 
     }
 
