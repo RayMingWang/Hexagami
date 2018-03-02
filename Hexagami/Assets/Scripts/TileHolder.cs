@@ -28,14 +28,27 @@ public class TileHolder : MonoBehaviour {
         add_holder(7,18);
         add_holder(8, 5);
         add_holder(9, 14);
+
         add_holder(10, 19);
         add_holder(11, 5);
         add_holder(12, 7);
+        add_holder(13, 14);
+        add_holder(14, 13);
+        add_holder(15, 6);
+        add_holder(16, 11);
+
+        add_holder(17, 4);
+        add_holder(18, 3);
+        add_holder(19, 11);
+        add_holder(20, 15);
+        add_holder(21, 5);
+        add_holder(22, 14);
+        add_holder(23, 16);
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
