@@ -136,7 +136,7 @@ public class TileHolder : MonoBehaviour {
 
         if (Tile_list[tag].token == null)
         {
-            Debug.Log("There is no token");
+            //Debug.Log("There is no token");
             return;
 
         }
@@ -145,15 +145,105 @@ public class TileHolder : MonoBehaviour {
         if (temp.Count >1)
         {
             HexTile newland = (HexTile)temp[temp.Count - 2];
-           
+            /*
             Tile_list[newland.hex_tile_tag].token = Tile_list[tag].token;
             Tile_list[tag].token.tile = Tile_list[newland.hex_tile_tag];
             Tile_list[tag].token = null;
-            /*
-            newland.token = Tile_list[tag].token;
-            Tile_list[tag].token.tile = newland;
-            Tile_list[tag].token = null;
             */
+            if (newland.token == null)
+            {
+                newland.token = Tile_list[tag].token;
+                Tile_list[tag].token.tile = newland;
+                Tile_list[tag].token = null;
+            }
+            else
+            {
+                //token overlap
+                Debug.Log("overlap");
+                Token oldtoken = newland.token;
+                newland.token = Tile_list[tag].token;
+                Tile_list[tag].token.tile = newland;
+                Tile_list[tag].token = null;
+                switch (oldtoken.token_tag)
+                {
+                    case 0:
+                        temp = (ArrayList)map[8];
+                        if (temp.Count != 0)
+                        {
+                            Tile_list[0].token = Tile_list[tag].token;
+                            Tile_list[tag].token.tile = Tile_list[0];
+                            Tile_list[tag].token = null;
+
+
+                        }
+                        else
+                        {
+
+                            temp = (ArrayList)map[9];
+                            HexTile temptile = (HexTile)temp[temp.Count - 1];
+                            recover_tag = 9;
+                            recover_token = Tile_list[tag].token;
+                            Tile_list[tag].token = null;
+                            recover_state = true;
+                            recover_tokentag = 0;
+                            temptile.ManualFlip();
+                        }
+                        break;
+
+                    case 1:
+                        temp = (ArrayList)map[19];
+                        if (temp.Count != 0)
+                        {
+                            Tile_list[10].token = Tile_list[tag].token;
+                            Tile_list[tag].token.tile = Tile_list[10];
+                            Tile_list[tag].token = null;
+
+
+                        }
+                        else
+                        {
+
+                            temp = (ArrayList)map[15];
+                            HexTile temptile = (HexTile)temp[temp.Count - 1];
+                            recover_tag = 15;
+                            recover_token = Tile_list[tag].token;
+                            Tile_list[tag].token = null;
+                            recover_state = true;
+                            recover_tokentag = 1;
+                            temptile.ManualFlip();
+                        }
+                        break;
+
+                    case 2:
+                        temp = (ArrayList)map[3];
+                        if (temp.Count != 0)
+                        {
+                            Tile_list[18].token = Tile_list[tag].token;
+                            Tile_list[tag].token.tile = Tile_list[18];
+                            Tile_list[tag].token = null;
+
+
+                        }
+                        else
+                        {
+
+                            temp = (ArrayList)map[6];
+                            HexTile temptile = (HexTile)temp[temp.Count - 1];
+                            recover_tag = 6;
+                            recover_token = Tile_list[tag].token;
+                            Tile_list[tag].token = null;
+                            recover_state = true;
+                            recover_tokentag = 2;
+                            temptile.ManualFlip();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+     
+            
+            
             
             
             

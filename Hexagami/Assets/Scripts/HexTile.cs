@@ -240,9 +240,9 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
-                
-                holder.leave_holder(hex_tile_tag, currentTarget , frontTarget, rearTarget);
                 currentTarget = rearTarget;
+                holder.leave_holder(hex_tile_tag, frontTarget, frontTarget, rearTarget);
+                
 
 
 
@@ -258,9 +258,9 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
-                
-                holder.leave_holder(hex_tile_tag, currentTarget,frontTarget,rearTarget);
                 currentTarget = frontTarget;
+                holder.leave_holder(hex_tile_tag, rearTarget, frontTarget,rearTarget);
+                
             }
 
         }
