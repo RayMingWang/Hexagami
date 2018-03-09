@@ -170,9 +170,8 @@ public class TileHolder : MonoBehaviour {
                         temp = (ArrayList)map[8];
                         if (temp.Count != 0)
                         {
-                            Tile_list[0].token = Tile_list[tag].token;
-                            Tile_list[tag].token.tile = Tile_list[0];
-                            Tile_list[tag].token = null;
+                            Tile_list[0].token = oldtoken;
+                            oldtoken.tile = Tile_list[0];
 
 
                         }
@@ -182,8 +181,7 @@ public class TileHolder : MonoBehaviour {
                             temp = (ArrayList)map[9];
                             HexTile temptile = (HexTile)temp[temp.Count - 1];
                             recover_tag = 9;
-                            recover_token = Tile_list[tag].token;
-                            Tile_list[tag].token = null;
+                            recover_token = oldtoken;
                             recover_state = true;
                             recover_tokentag = 0;
                             temptile.ManualFlip();
@@ -194,9 +192,8 @@ public class TileHolder : MonoBehaviour {
                         temp = (ArrayList)map[19];
                         if (temp.Count != 0)
                         {
-                            Tile_list[10].token = Tile_list[tag].token;
-                            Tile_list[tag].token.tile = Tile_list[10];
-                            Tile_list[tag].token = null;
+                            Tile_list[10].token = oldtoken;
+                            oldtoken.tile = Tile_list[10];
 
 
                         }
@@ -206,8 +203,7 @@ public class TileHolder : MonoBehaviour {
                             temp = (ArrayList)map[15];
                             HexTile temptile = (HexTile)temp[temp.Count - 1];
                             recover_tag = 15;
-                            recover_token = Tile_list[tag].token;
-                            Tile_list[tag].token = null;
+                            recover_token = oldtoken;
                             recover_state = true;
                             recover_tokentag = 1;
                             temptile.ManualFlip();
@@ -218,11 +214,8 @@ public class TileHolder : MonoBehaviour {
                         temp = (ArrayList)map[3];
                         if (temp.Count != 0)
                         {
-                            Tile_list[18].token = Tile_list[tag].token;
-                            Tile_list[tag].token.tile = Tile_list[18];
-                            Tile_list[tag].token = null;
-
-
+                            Tile_list[18].token = oldtoken;
+                            oldtoken.tile = Tile_list[18];
                         }
                         else
                         {
@@ -230,8 +223,7 @@ public class TileHolder : MonoBehaviour {
                             temp = (ArrayList)map[6];
                             HexTile temptile = (HexTile)temp[temp.Count - 1];
                             recover_tag = 6;
-                            recover_token = Tile_list[tag].token;
-                            Tile_list[tag].token = null;
+                            recover_token = oldtoken;  
                             recover_state = true;
                             recover_tokentag = 2;
                             temptile.ManualFlip();
