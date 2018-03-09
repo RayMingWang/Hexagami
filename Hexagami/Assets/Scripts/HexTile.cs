@@ -48,6 +48,8 @@ public class HexTile : MonoBehaviour {
         mouseUpStart = false;
         mouseEnter = true;
     }
+
+
     private void OnMouseExit()
     {
         
@@ -64,7 +66,8 @@ public class HexTile : MonoBehaviour {
     {
         if (!check_under())
             return;
-
+        if (!holder.check_moving(frontTarget, rearTarget))
+            return;
         if (currentTarget == rearTarget)
             holder.add_holder(hex_tile_tag,frontTarget);
         else
@@ -237,10 +240,12 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
+                
                 holder.leave_holder(hex_tile_tag, currentTarget , frontTarget, rearTarget);
                 currentTarget = rearTarget;
-                
-                
+
+
+
             }
 
 
@@ -253,6 +258,7 @@ public class HexTile : MonoBehaviour {
                 mouseDown = false;
                 mouseEnter = false;
                 mouseUpStart = true;
+                
                 holder.leave_holder(hex_tile_tag, currentTarget,frontTarget,rearTarget);
                 currentTarget = frontTarget;
             }
@@ -296,6 +302,22 @@ public class HexTile : MonoBehaviour {
     public void returntoTop()
     {
         transform.position += new Vector3(0, 0.01f, 0);
+    }
+
+    public void ManualFlip()
+    {
+        /*
+        if (!check_under())
+            return;
+        
+        if (!holder.check_moving(frontTarget, rearTarget))
+            return;
+        */
+        if (currentTarget == rearTarget)
+            holder.add_holder(hex_tile_tag, frontTarget);
+        else
+            holder.add_holder(hex_tile_tag, rearTarget);
+        mouseDown = true;
     }
 }
 
