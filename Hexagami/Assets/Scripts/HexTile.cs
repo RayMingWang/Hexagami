@@ -11,7 +11,7 @@ public class HexTile : MonoBehaviour {
     public int frontTarget;
     public int rearTarget;
     public int currentTarget;
-
+    public bool fliped_by_player = false;
 
     //鼠标放上去查看用的
     public float lookangle = 50.0f;
@@ -27,6 +27,8 @@ public class HexTile : MonoBehaviour {
     [SerializeField]
     private bool mouseUpStart = true;
 
+    
+
     //鼠标点进去的
     public float fliptime = 0.5f;
     [SerializeField]
@@ -40,6 +42,10 @@ public class HexTile : MonoBehaviour {
     private void OnMouseEnter()
     {
         //GetComponent<Renderer>().material.shader = Shader.Find("Self-Illumin/Outlined Diffuse");
+        if (holder.check_token(this))
+        {
+            return;
+        }
         if (!check_under())
             return;
 
@@ -64,6 +70,11 @@ public class HexTile : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        if (holder.check_token(this))
+        {
+            return;
+        }
+
         if (!check_under())
             return;
         if (!holder.check_moving(frontTarget, rearTarget))
@@ -73,6 +84,8 @@ public class HexTile : MonoBehaviour {
         else
             holder.add_holder(hex_tile_tag, rearTarget);
         mouseDown = true;
+        fliped_by_player = true;
+
     }
 
 

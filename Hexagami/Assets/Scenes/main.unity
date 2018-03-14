@@ -394,6 +394,7 @@ MonoBehaviour:
   frontTarget: 12
   rearTarget: 7
   currentTarget: 7
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -510,6 +511,7 @@ MonoBehaviour:
   frontTarget: 17
   rearTarget: 13
   currentTarget: 13
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -555,6 +557,7 @@ MonoBehaviour:
   frontTarget: 1
   rearTarget: 4
   currentTarget: 4
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -763,6 +766,7 @@ MonoBehaviour:
   frontTarget: 10
   rearTarget: 5
   currentTarget: 5
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1033,6 +1037,7 @@ MonoBehaviour:
   frontTarget: 14
   rearTarget: 9
   currentTarget: 14
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1082,6 +1087,7 @@ MonoBehaviour:
   frontTarget: 19
   rearTarget: 15
   currentTarget: 19
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1131,6 +1137,7 @@ MonoBehaviour:
   frontTarget: 2
   rearTarget: 1
   currentTarget: 2
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1226,6 +1233,7 @@ MonoBehaviour:
   frontTarget: 18
   rearTarget: 17
   currentTarget: 18
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1500,6 +1508,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: 0}
+--- !u!1 &590394927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 590394928}
+  - component: {fileID: 590394929}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &590394928
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 590394927}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 150, y: 1, z: 150}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &590394929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 590394927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e3f66c8a58cf24eb387068991f646d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holder: {fileID: 1729351236}
 --- !u!1001 &604355723
 Prefab:
   m_ObjectHideFlags: 0
@@ -1590,6 +1639,7 @@ MonoBehaviour:
   frontTarget: 15
   rearTarget: 14
   currentTarget: 14
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1707,6 +1757,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: -180, y: 60, z: 0}
+--- !u!1 &699145741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 699145744}
+  - component: {fileID: 699145743}
+  - component: {fileID: 699145742}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &699145742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699145741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &699145743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699145741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &699145744
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699145741}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &711440407
 Prefab:
   m_ObjectHideFlags: 0
@@ -1797,6 +1909,7 @@ MonoBehaviour:
   frontTarget: 11
   rearTarget: 6
   currentTarget: 11
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -1908,6 +2021,7 @@ MonoBehaviour:
   frontTarget: 6
   rearTarget: 5
   currentTarget: 5
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -2070,6 +2184,7 @@ MonoBehaviour:
   frontTarget: 11
   rearTarget: 15
   currentTarget: 11
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -2201,7 +2316,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1529904185}
+      objectReference: {fileID: 1542298033}
     - target: {fileID: 114858063843260942, guid: e22285a3f19d94d4ca832edb5ef9fadd,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2211,6 +2326,30 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114858063843260942, guid: e22285a3f19d94d4ca832edb5ef9fadd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858063843260942, guid: e22285a3f19d94d4ca832edb5ef9fadd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858063843260942, guid: e22285a3f19d94d4ca832edb5ef9fadd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529772260530620, guid: e22285a3f19d94d4ca832edb5ef9fadd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114235349024823428, guid: e22285a3f19d94d4ca832edb5ef9fadd,
+        type: 2}
+      propertyPath: Info_Menu
+      value: 
+      objectReference: {fileID: 1625140573}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e22285a3f19d94d4ca832edb5ef9fadd, type: 2}
   m_IsPrefabParent: 0
@@ -2391,6 +2530,7 @@ MonoBehaviour:
   frontTarget: 15
   rearTarget: 18
   currentTarget: 15
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -2444,6 +2584,7 @@ MonoBehaviour:
   frontTarget: 11
   rearTarget: 10
   currentTarget: 11
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -2559,6 +2700,7 @@ MonoBehaviour:
   frontTarget: 9
   rearTarget: 13
   currentTarget: 9
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -2779,6 +2921,7 @@ MonoBehaviour:
   frontTarget: 10
   rearTarget: 14
   currentTarget: 14
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -3208,7 +3351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1439747725
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3302,6 +3445,7 @@ MonoBehaviour:
   frontTarget: 16
   rearTarget: 15
   currentTarget: 15
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -3341,6 +3485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 410949178}
   token_tag: 1
+  holder: {fileID: 1729351236}
 --- !u!1 &1500677963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,12 +3515,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1529904185 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114235349024823428, guid: e22285a3f19d94d4ca832edb5ef9fadd,
-    type: 2}
-  m_PrefabInternal: {fileID: 853339954}
-  m_Script: {fileID: 11500000, guid: 11cdd1bd16454334289f49785f8a18ce, type: 3}
 --- !u!1001 &1532229153
 Prefab:
   m_ObjectHideFlags: 0
@@ -3439,6 +3578,12 @@ Prefab:
     - {fileID: 9500000, guid: b9a896319a3f99b4b854cbfc0edbb28f, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: b9a896319a3f99b4b854cbfc0edbb28f, type: 3}
   m_IsPrefabParent: 0
+--- !u!114 &1542298033 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114235349024823428, guid: e22285a3f19d94d4ca832edb5ef9fadd,
+    type: 2}
+  m_PrefabInternal: {fileID: 853339954}
+  m_Script: {fileID: 11500000, guid: 11cdd1bd16454334289f49785f8a18ce, type: 3}
 --- !u!1 &1548324446 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: b9a896319a3f99b4b854cbfc0edbb28f, type: 3}
@@ -3466,6 +3611,7 @@ MonoBehaviour:
   frontTarget: 7
   rearTarget: 6
   currentTarget: 6
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -3786,6 +3932,7 @@ MonoBehaviour:
   frontTarget: 9
   rearTarget: 4
   currentTarget: 9
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -3808,6 +3955,11 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: b9a896319a3f99b4b854cbfc0edbb28f, type: 3}
+--- !u!1 &1625140573 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1938358819471570, guid: e22285a3f19d94d4ca832edb5ef9fadd,
+    type: 2}
+  m_PrefabInternal: {fileID: 853339954}
 --- !u!1001 &1638832769
 Prefab:
   m_ObjectHideFlags: 0
@@ -3908,6 +4060,7 @@ MonoBehaviour:
   frontTarget: 9
   rearTarget: 8
   currentTarget: 8
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -4028,6 +4181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 1638832772}
   token_tag: 0
+  holder: {fileID: 1729351236}
 --- !u!1001 &1667902042
 Prefab:
   m_ObjectHideFlags: 0
@@ -4137,6 +4291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 1987291877}
   token_tag: 2
+  holder: {fileID: 1729351236}
 --- !u!1 &1728593309
 GameObject:
   m_ObjectHideFlags: 0
@@ -4277,6 +4432,7 @@ MonoBehaviour:
   - {fileID: 1652809566}
   - {fileID: 1490901738}
   - {fileID: 1704781527}
+  controller: {fileID: 590394929}
 --- !u!4 &1729351237
 Transform:
   m_ObjectHideFlags: 0
@@ -4556,6 +4712,7 @@ MonoBehaviour:
   frontTarget: 6
   rearTarget: 2
   currentTarget: 6
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -4688,6 +4845,7 @@ MonoBehaviour:
   frontTarget: 5
   rearTarget: 9
   currentTarget: 5
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -4978,6 +5136,7 @@ MonoBehaviour:
   frontTarget: 3
   rearTarget: 6
   currentTarget: 3
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5
@@ -5123,6 +5282,7 @@ MonoBehaviour:
   frontTarget: 12
   rearTarget: 16
   currentTarget: 16
+  fliped_by_player: 0
   lookangle: 50
   lookOpenTime: 0.3
   lookCloseTime: 0.5

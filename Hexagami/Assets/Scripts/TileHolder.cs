@@ -5,10 +5,10 @@ using UnityEngine;
 public class TileHolder : MonoBehaviour {
     public HexTile[] Tile_list;
     public Token[] token_list;
+    public GameController controller;
     private bool[] move_state = new bool[20];
      ArrayList map =new ArrayList();
-    // Use this for initialization
-
+    private int currentplayer = 0;
     private bool[] recover_state = new bool[3];
 
     //private Token recover_token;
@@ -89,6 +89,11 @@ public class TileHolder : MonoBehaviour {
         {
             token_list[2].ResetTokenPosition();
         }
+        if (temp_tile.fliped_by_player)
+        {
+            temp_tile.fliped_by_player = false;
+            controller.FlipComplete();
+        }
 
     }
 
@@ -129,6 +134,29 @@ public class TileHolder : MonoBehaviour {
         return true;
     }
 
+    public bool check_token(HexTile tile)
+    {
+        if (tile.token == null)
+        {
+            return false;
+        }
+        else
+        {
+            if (tile.token.token_tag != currentplayer)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public float check_distant_token(Vector3 tile_position)
+    {
+        return Vector3.Distance(tile_position, token_list[0].transform.position);
+    }
+    
+    
+
     public HexTile Get_HexTile_by_Map(int target,int offset)
     {
         ArrayList temp = (ArrayList)map[target];
@@ -146,5 +174,10 @@ public class TileHolder : MonoBehaviour {
             return null;
         else
             return (HexTile)temp[temp.Count - 1];
+    }
+
+    public void setCurrentPlayer(int player)
+    {
+        currentplayer = player;
     }
 }

@@ -25,6 +25,7 @@ public class PromotCanvas : MonoBehaviour {
 
     public void Active_Info()
     {
+        //Debug.Log("???");
         Info_state = !Info_state;
         Info_Menu.SetActive(Info_state);
         Info_dismiss_bt.SetActive(Info_state);
