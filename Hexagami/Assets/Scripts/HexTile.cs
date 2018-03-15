@@ -332,6 +332,32 @@ public class HexTile : MonoBehaviour {
             holder.add_holder(hex_tile_tag, rearTarget);
         mouseDown = true;
     }
+
+    public float NpcFlip_Check(int current_player)
+    {
+        if (holder.check_token(this))
+        {
+            return 100.0f;
+        }
+
+        if (!check_under())
+            return 100f;
+        if (!holder.check_moving(frontTarget, rearTarget))
+            return 100f;
+        return holder.check_distant_token(transform.position, current_player);
+        
+        
+
+    }
+    public void NpcFlip()
+    {
+        if (currentTarget == rearTarget)
+            holder.add_holder(hex_tile_tag, frontTarget);
+        else
+            holder.add_holder(hex_tile_tag, rearTarget);
+        mouseDown = true;
+        fliped_by_player = true;
+    }
 }
 
 

@@ -6,8 +6,13 @@ public class TileHolder : MonoBehaviour {
     public HexTile[] Tile_list;
     public Token[] token_list;
     public GameController controller;
+    [SerializeField]
     private bool[] move_state = new bool[20];
-     ArrayList map =new ArrayList();
+    [SerializeField]
+    int addtime = -24;
+    [SerializeField]
+    int leavetime = 0;
+    ArrayList map =new ArrayList();
     private int currentplayer = 0;
     private bool[] recover_state = new bool[3];
 
@@ -57,6 +62,7 @@ public class TileHolder : MonoBehaviour {
 
     public void leave_holder(int tag, int leavetarget,int arrivetarget)
     {
+        leavetime--;
         ArrayList temp = (ArrayList)map[leavetarget];
         
         temp.Remove(temp[temp.Count-1]);
@@ -99,6 +105,7 @@ public class TileHolder : MonoBehaviour {
 
     public void add_holder(int tag, int target)
     {
+        addtime++;
         ArrayList temp = (ArrayList)map[target];
         foreach (HexTile i in temp)
         {
@@ -150,9 +157,9 @@ public class TileHolder : MonoBehaviour {
         return false;
     }
 
-    public float check_distant_token(Vector3 tile_position)
+    public float check_distant_token(Vector3 tile_position,int current_player)
     {
-        return Vector3.Distance(tile_position, token_list[0].transform.position);
+        return Vector3.Distance(tile_position, token_list[current_player].transform.position);
     }
     
     

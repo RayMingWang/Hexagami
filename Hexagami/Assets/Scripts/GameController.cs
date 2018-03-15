@@ -7,24 +7,16 @@ public class GameController : MonoBehaviour {
     int currentplayer=0;
     int flip_left = 3;
 
-    private float Pause_between_move = 1.0f;
+    private float Pause_between_move = 1.8f;
 	// Use this for initialization
 
     public void FlipComplete()
     {
-        if (currentplayer == 0)
-        {
-            flip_left--;
-        }
-        else
-        {
-            //StartCoroutine(PauseBetweenNPCMove());
-            flip_left--;
-        }
+        
 
 
 
-
+        flip_left--;
         if (flip_left == 0)
         {
             currentplayer++;
@@ -33,13 +25,46 @@ public class GameController : MonoBehaviour {
             holder.setCurrentPlayer(currentplayer);
             flip_left = 3;
         }
+        if (currentplayer != 0)
+        {
+            StartCoroutine(PauseBetweenNPCMove());
+            NPCFlip();
+            
+        }
     }
 
     IEnumerator PauseBetweenNPCMove()
     {
-        print(Time.time);
+        //print(Time.time);
         yield return new WaitForSeconds(Pause_between_move);
-        print(Time.time);
+        //print(Time.time);
+    }
+
+    void NPCFlip()
+    {
+        switch (flip_left)
+        {
+            case 3:
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
+        while(true)
+        {
+            int i = (int)Random.Range(0.1f, 19.8f);
+            HexTile temp = holder.Get_HexTile_by_Map(i);
+            if (temp == null)
+                continue;
+            if (80f - temp.NpcFlip_Check(currentplayer) > Random.Range(0.0f, 100f))
+            {
+                temp.NpcFlip();
+                break;
+            }
+                
+        }
+        //holder.token_list[currentplayer];
     }
 
     void Start () {
