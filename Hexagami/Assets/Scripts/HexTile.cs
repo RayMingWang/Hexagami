@@ -358,6 +358,14 @@ public class HexTile : MonoBehaviour {
         mouseDown = true;
         fliped_by_player = true;
     }
+    
+    public int currentPosition()
+    {
+        if (currentTarget == rearTarget)
+            return frontTarget;
+        else
+            return rearTarget;
+    }
 }
 
 

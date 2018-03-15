@@ -24,34 +24,34 @@ public class TileHolder : MonoBehaviour {
             map.Add(new ArrayList());
             move_state[i] = false;
         }
-        
-        add_holder(0,8);
-        add_holder(1, 9);
-        add_holder(2, 9);
 
-        add_holder(3, 11);
-        add_holder(4, 6);
-        add_holder(5, 15);
-        add_holder(6, 2);
-        add_holder(7,18);
-        add_holder(8, 5);
-        add_holder(9, 14);
+        add_tile(0,8);
+        add_tile(1, 9);
+        add_tile(2, 9);
 
-        add_holder(10, 19);
-        add_holder(11, 5);
-        add_holder(12, 7);
-        add_holder(13, 14);
-        add_holder(14, 13);
-        add_holder(15, 6);
-        add_holder(16, 11);
+        add_tile(3, 11);
+        add_tile(4, 6);
+        add_tile(5, 15);
+        add_tile(6, 2);
+        add_tile(7,18);
+        add_tile(8, 5);
+        add_tile(9, 14);
 
-        add_holder(17, 4);
-        add_holder(18, 3);
-        add_holder(19, 11);
-        add_holder(20, 15);
-        add_holder(21, 5);
-        add_holder(22, 14);
-        add_holder(23, 16);
+        add_tile(10, 19);
+        add_tile(11, 5);
+        add_tile(12, 7);
+        add_tile(13, 14);
+        add_tile(14, 13);
+        add_tile(15, 6);
+        add_tile(16, 11);
+
+        add_tile(17, 4);
+        add_tile(18, 3);
+        add_tile(19, 11);
+        add_tile(20, 15);
+        add_tile(21, 5);
+        add_tile(22, 14);
+        add_tile(23, 16);
 
     }
 
@@ -103,7 +103,7 @@ public class TileHolder : MonoBehaviour {
 
     }
 
-    public void add_holder(int tag, int target)
+    public void add_tile(int tag, int target)
     {
         addtime++;
         ArrayList temp = (ArrayList)map[target];
@@ -115,6 +115,21 @@ public class TileHolder : MonoBehaviour {
 
         temp.Add(Tile_list[tag]);
     }
+
+    public void add_holder(int tag, int target)
+    {
+        addtime++;
+        ArrayList temp = (ArrayList)map[target];
+        foreach (HexTile i in temp)
+        {
+            i.foldflat();
+            i.getCovered();
+        }
+        move_state[Tile_list[tag].frontTarget] = true ;
+        move_state[Tile_list[tag].rearTarget] = true;
+        temp.Add(Tile_list[tag]);
+    }
+
 
     public bool check_under(int tag, int target)
     {
@@ -136,8 +151,7 @@ public class TileHolder : MonoBehaviour {
             return false;
         }
 
-        move_state[front] = true;
-        move_state[rear] = true;
+
         return true;
     }
 
@@ -181,6 +195,11 @@ public class TileHolder : MonoBehaviour {
             return null;
         else
             return (HexTile)temp[temp.Count - 1];
+    }
+
+    public HexTile Get_HexTile_by_Token(int target)
+    {
+        return token_list[target].tile;
     }
 
     public void setCurrentPlayer(int player)
