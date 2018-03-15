@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,6 +70,10 @@ public class HexTile : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        if (!holder.check_pause())
+        {
+            return;
+        }
         if (holder.check_token(this))
         {
             return;

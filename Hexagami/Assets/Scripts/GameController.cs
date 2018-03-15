@@ -5,17 +5,16 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
     public TileHolder holder;
     public PromotCanvas prompt;
+    public Animator camera;
     int currentplayer=0;
     int flip_left = 3;
+    int defaultplayer = 0;
 
     private float Pause_between_move = 0.8f;
 	// Use this for initialization
 
     public void FlipComplete()
     {
-        
-
-
 
         flip_left--;
         if (flip_left == 0)
@@ -28,12 +27,26 @@ public class GameController : MonoBehaviour {
             flip_left = 3;
         }
         prompt.SetFold(flip_left);
-        if (currentplayer != 0)
+        if (currentplayer != defaultplayer)
         {
             StartCoroutine(PauseBetweenNPCMove());
-            
+            holder.pause = false;
             
         }
+        else
+        {
+            holder.pause = true;
+        }
+    }
+
+    public void setPlayer(int player)
+    {
+        camera.enabled = true;
+        camera.SetBool("ChooseToPlay",true);
+        prompt.StartGame();
+        defaultplayer = player;
+        StartCoroutine(closeAnimator());
+
     }
 
     IEnumerator PauseBetweenNPCMove()
@@ -41,6 +54,22 @@ public class GameController : MonoBehaviour {
         //print(Time.time);
         yield return new WaitForSeconds(Pause_between_move);
         NPCFlip();
+        //print(Time.time);
+    }
+
+    IEnumerator closeAnimator()
+    {
+        //print(Time.time);
+        yield return new WaitForSeconds(2.5f);
+        camera.enabled=false;
+        if (defaultplayer != 0)
+        {
+            FlipComplete();
+        }
+        else
+        {
+            holder.pause = true;
+        }
         //print(Time.time);
     }
 

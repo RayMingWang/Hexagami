@@ -6,6 +6,8 @@ public class TileHolder : MonoBehaviour {
     public HexTile[] Tile_list;
     public Token[] token_list;
     public GameController controller;
+    public int defaultplayer = 0;
+    public bool pause = false;
     [SerializeField]
     private bool[] move_state = new bool[20];
     [SerializeField]
@@ -130,7 +132,10 @@ public class TileHolder : MonoBehaviour {
         temp.Add(Tile_list[tag]);
     }
 
-
+    public bool check_pause()
+    {
+        return pause;
+    }
     public bool check_under(int tag, int target)
     {
         ArrayList temp = (ArrayList)map[target];
@@ -206,4 +211,6 @@ public class TileHolder : MonoBehaviour {
     {
         currentplayer = player;
     }
+
+    
 }

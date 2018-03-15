@@ -10,6 +10,7 @@ public class MenuHexTile : MonoBehaviour {
     public int frontTarget;
     public int rearTarget;
     public int currentTarget;
+    public GameController controller;
 
     //鼠标放上去查看用的
     public float lookangle = 50.0f;
@@ -61,8 +62,9 @@ public class MenuHexTile : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        
 
+        mouseDown = true;
+        controller.setPlayer(hex_tile_tag);
     }
 
 

@@ -66,4 +66,10 @@ public class PromotCanvas : MonoBehaviour {
         Faction_set_state = 1;
     }
 
+    public void StartGame()
+    {
+        FactionIcon.gameObject.SetActive(true);
+        FoldLeft.gameObject.SetActive(true);
+    }
+
 }
