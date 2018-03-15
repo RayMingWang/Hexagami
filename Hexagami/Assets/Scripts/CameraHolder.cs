@@ -12,6 +12,7 @@ public class CameraHolder : MonoBehaviour {
     private float distance;
 	// Use this for initialization
 	void Start () {
+        //GetComponent<Animator>().enabled = false;
         distance = camera_transform.position.z;
     }
 
