@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ChooseTileHolder : MonoBehaviour
+public class ChooseTileHolder : TileHolder
 {
-    public HexTile[] Tile_list;
-    public Token[] token_list;
-    public GameController controller;
+
     private bool[] move_state = new bool[3];
     ArrayList map = new ArrayList();
     private int currentplayer = 0;
     private bool[] recover_state = new bool[3];
+
 
     //private Token recover_token;
     void Start()
@@ -21,33 +20,9 @@ public class ChooseTileHolder : MonoBehaviour
             move_state[i] = false;
         }
 
-        add_tile(0, 8);
-        add_tile(1, 9);
-        add_tile(2, 9);
-
-        add_tile(3, 11);
-        add_tile(4, 6);
-        add_tile(5, 15);
-        add_tile(6, 2);
-        add_tile(7, 18);
-        add_tile(8, 5);
-        add_tile(9, 14);
-
-        add_tile(10, 19);
-        add_tile(11, 5);
-        add_tile(12, 7);
-        add_tile(13, 14);
-        add_tile(14, 13);
-        add_tile(15, 6);
-        add_tile(16, 11);
-
-        add_tile(17, 4);
-        add_tile(18, 3);
-        add_tile(19, 11);
-        add_tile(20, 15);
-        add_tile(21, 5);
-        add_tile(22, 14);
-        add_tile(23, 16);
+        add_tile(0, 1);
+        add_tile(1, 2);
+        add_tile(2, 3);
 
     }
 
