@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PromotCanvas : MonoBehaviour {
-    public Canvas Pause_Menu;
+    public GameObject Pause_Menu;
     public GameObject Info_Menu;
+    public GameObject Win_Menu;
     public GameObject Info_dismiss_bt;
 
     public Image FactionIcon;
     public Image FoldLeft;
+    public Image WinnerIcon;
     private bool Pause_state = false;
     private bool Info_state = false;
     private int Faction_set_state = 0;
@@ -21,7 +24,12 @@ public class PromotCanvas : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Faction_set_state==1)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Active_Pause();
+        }
+
+            if (Faction_set_state==1)
         {
             FactionIcon.rectTransform.localScale -= new Vector3(Time.deltaTime*5f,0,0);
             if (FactionIcon.rectTransform.localScale.x<=0)
@@ -44,7 +52,7 @@ public class PromotCanvas : MonoBehaviour {
     public void Active_Pause()
     {
         Pause_state = !Pause_state;
-        Pause_Menu.gameObject.SetActive(Pause_state);
+        Pause_Menu.SetActive(Pause_state);
     }
 
     public void Active_Info()
@@ -70,6 +78,18 @@ public class PromotCanvas : MonoBehaviour {
     {
         FactionIcon.gameObject.SetActive(true);
         FoldLeft.gameObject.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("main");
+    }
+
+    public void SetWinner(int i)
+    {
+        Win_Menu.SetActive(true);
+
+        WinnerIcon.sprite = Resources.Load<Sprite>("white_clan_0" + i.ToString());
     }
 
 }

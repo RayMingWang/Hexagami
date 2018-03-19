@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
     public TileHolder holder;
     public PromotCanvas prompt;
     public Animator camera;
+    [SerializeField]
     int currentplayer=0;
     int flip_left = 3;
     int defaultplayer = 0;
