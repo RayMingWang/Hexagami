@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
     public void FlipComplete()
     {
 
+
         flip_left--;
         if (flip_left == 0)
         {
@@ -79,7 +80,7 @@ public class GameController : MonoBehaviour {
         switch (flip_left)
         {
             case 3:
-                if (Random.value < 0.8)
+                if (Random.value < 1.8)
                 {
                     if (holder.Get_HexTile_by_Token(currentplayer) == null)
                     {
@@ -93,14 +94,14 @@ public class GameController : MonoBehaviour {
                     int currentTiletag = holder.Get_HexTile_by_Map(currentPosition).hex_tile_tag;
                     if (holder.Get_HexTile_by_Map(currentPosition).hex_tile_tag == currentTiletag)
                     {
-                        holder.Get_HexTile_by_Token(currentplayer).NpcFlip();
+                        holder.Get_HexTile_by_Map(currentPosition).NpcFlip();
                         return;
                     }
                 }
 
                 break;
             case 1:
-                if (Random.value < 0.7)
+                if (Random.value < 1.7)
                 {
                     if (holder.Get_HexTile_by_Token(currentplayer) == null)
                     {
@@ -114,7 +115,7 @@ public class GameController : MonoBehaviour {
                     int currentTiletag = holder.Get_HexTile_by_Map(currentPosition).hex_tile_tag;
                     if (holder.Get_HexTile_by_Map(currentPosition).hex_tile_tag != currentTiletag)
                     {
-                        holder.Get_HexTile_by_Token(currentplayer).NpcFlip();
+                        holder.Get_HexTile_by_Map(currentPosition).NpcFlip();
                         return;
                     }
                 }
@@ -122,6 +123,7 @@ public class GameController : MonoBehaviour {
             default:
                 break;
         }
+        
         while(true)
         {
             int i = (int)Random.Range(0.1f, 19.8f);
@@ -136,6 +138,11 @@ public class GameController : MonoBehaviour {
                 
         }
         //holder.token_list[currentplayer];
+    }
+
+    public void setVictory(int i)
+    {
+        prompt.SetWinner(i);
     }
 
     void Start () {

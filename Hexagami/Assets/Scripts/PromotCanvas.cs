@@ -85,11 +85,16 @@ public class PromotCanvas : MonoBehaviour {
         SceneManager.LoadScene("main");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void SetWinner(int i)
     {
         Win_Menu.SetActive(true);
 
-        WinnerIcon.sprite = Resources.Load<Sprite>("white_clan_0" + i.ToString());
+        WinnerIcon.sprite = Resources.Load<Sprite>("white_clan_" + i.ToString());
     }
 
 }

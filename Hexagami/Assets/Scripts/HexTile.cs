@@ -365,10 +365,13 @@ public class HexTile : MonoBehaviour {
     
     public int currentPosition()
     {
+        /*
         if (currentTarget == rearTarget)
             return frontTarget;
         else
             return rearTarget;
+            */
+        return currentTarget;
     }
 }
 

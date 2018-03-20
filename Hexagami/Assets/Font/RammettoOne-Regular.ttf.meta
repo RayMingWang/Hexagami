@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: cecce0f00e281344b9d84c5c6a4c5689
+timeCreated: 1521493442
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Rammetto One
+  fontNames:
+  - Rammetto One
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

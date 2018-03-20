@@ -64,6 +64,7 @@ public class TileHolder : MonoBehaviour {
 
     public void leave_holder(int tag, int leavetarget,int arrivetarget)
     {
+        bool norest = true;
         leavetime--;
         ArrayList temp = (ArrayList)map[leavetarget];
         
@@ -78,29 +79,43 @@ public class TileHolder : MonoBehaviour {
         HexTile temp_tile = Tile_list[tag];
         if (temp_tile.token != null)
         {
-            temp_tile.token.MoveToHexTile(arrivetarget,1);
+            CheckComplete(arrivetarget, temp_tile.token.token_tag);
+            norest = temp_tile.token.MoveToHexTile(arrivetarget,1);
+            norest = !norest;
             temp_tile.token = null;
+            /*
+            if (!norest)
+                return;
+                */
         }
 
 
         if (leavetarget == 9)
         {
-            token_list[0].ResetTokenPosition();
+            if(token_list[0].ResetTokenPosition())
+                norest = false;
         }
 
         if (leavetarget == 15)
         {
-            token_list[1].ResetTokenPosition();
+            if (token_list[1].ResetTokenPosition())
+                norest = false;
         }
-
         if (leavetarget == 6)
         {
-            token_list[2].ResetTokenPosition();
+            if (token_list[2].ResetTokenPosition())
+                norest = false;
+        }
+
+        if (temp_tile.fliped_by_player&& norest)
+        {
+            
+            controller.FlipComplete();
         }
         if (temp_tile.fliped_by_player)
         {
             temp_tile.fliped_by_player = false;
-            controller.FlipComplete();
+
         }
 
     }
@@ -212,5 +227,35 @@ public class TileHolder : MonoBehaviour {
         currentplayer = player;
     }
 
-    
+    public void CheckComplete(int arrive,int token)
+    {
+        if (arrive ==12&&token==0)
+        {
+            foreach (HexTile temp in Tile_list)
+            {
+                temp.enabled = false;
+                
+            }
+            controller.setVictory(token);
+        }
+        if (arrive == 1 && token == 1)
+        {
+            foreach (HexTile temp in Tile_list)
+            {
+                temp.enabled = false;
+                
+            }
+            controller.setVictory(token);
+        }
+        if (arrive == 17 && token == 2)
+        {
+            foreach (HexTile temp in Tile_list)
+            {
+                temp.enabled = false;
+                
+            }
+            controller.setVictory(token);
+        }
+        
+    }
 }

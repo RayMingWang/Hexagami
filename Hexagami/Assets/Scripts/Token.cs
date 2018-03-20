@@ -32,7 +32,7 @@ public class Token : MonoBehaviour {
 
     }
 
-    public void MoveToHexTile(int target,int offset)
+    public bool MoveToHexTile(int target,int offset)
     {
         //tile = null;
         HexTile Tile_target = holder.Get_HexTile_by_Map(target,offset);
@@ -41,8 +41,8 @@ public class Token : MonoBehaviour {
         if (Tile_target == null)
         {
             tile = null;
-            ResetTokenPosition();
-            return;
+            
+            return ResetTokenPosition();
         }
         //Fall on other token
         if (Tile_target.token != null)
@@ -53,27 +53,29 @@ public class Token : MonoBehaviour {
 
             tile = Tile_target;
             tile.token = this;
-            return;
+            return true;
         }
         else
         {
             tile = Tile_target;
             tile.token = this;
         }
+        return false;
     }
 
 
 
-    public void ResetTokenPosition()
+    public bool ResetTokenPosition()
     {
         if (tile != null)
-            return;
+            return false;
         switch (token_tag)
         {
             case 0:
                 if(holder.Get_HexTile_by_Map(8)!= null)
                 {
                     MoveToHexTile(8,0);
+                    holder.controller.FlipComplete();
                 }
                 else
                 {
@@ -84,6 +86,7 @@ public class Token : MonoBehaviour {
                 if (holder.Get_HexTile_by_Map(19) != null)
                 {
                     MoveToHexTile(19, 0);
+                    holder.controller.FlipComplete();
                 }
                 else
                 {
@@ -94,6 +97,7 @@ public class Token : MonoBehaviour {
                 if (holder.Get_HexTile_by_Map(3) != null)
                 {
                     MoveToHexTile(3, 0);
+                    holder.controller.FlipComplete();
                 }
                 else
                 {
@@ -103,5 +107,6 @@ public class Token : MonoBehaviour {
             default:
                 break;
         }
+        return true;
     }
 }
