@@ -49,7 +49,8 @@ public class HexTile : MonoBehaviour {
         if (!check_under())
             return;
 
-        //Debug.Log("Enter");
+        Debug.Log("Enter");
+
         looktimer_real = looktimer;
         mouseUpStart = false;
         mouseEnter = true;
@@ -62,7 +63,13 @@ public class HexTile : MonoBehaviour {
         if (!check_under())
             return;
             
-        //Debug.Log("Exit");
+        Debug.Log("Exit");
+
+        if(holder.finger_entry == hex_tile_tag)
+        {
+         
+        }
+
         mouseUpStart = true;
         //mouseDown = false;
 
@@ -70,6 +77,32 @@ public class HexTile : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        Debug.Log("Down");
+
+        holder.finger_entry = hex_tile_tag;
+        if (looktimer_real > 0)
+        {
+            if (!holder.check_pause())
+            {
+                return;
+            }
+            if (holder.check_token(this))
+            {
+                return;
+            }
+
+            if (!check_under())
+                return;
+            if (!holder.check_moving(frontTarget, rearTarget))
+                return;
+            if (currentTarget == rearTarget)
+                holder.add_holder(hex_tile_tag, frontTarget);
+            else
+                holder.add_holder(hex_tile_tag, rearTarget);
+            mouseDown = true;
+            fliped_by_player = true;
+        }
+        /*
         if (!holder.check_pause())
         {
             return;
@@ -89,6 +122,7 @@ public class HexTile : MonoBehaviour {
             holder.add_holder(hex_tile_tag, rearTarget);
         mouseDown = true;
         fliped_by_player = true;
+        */
 
     }
 

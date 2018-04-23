@@ -8,6 +8,9 @@ public class TileHolder : MonoBehaviour {
     public GameController controller;
     public int defaultplayer = 0;
     public bool pause = false;
+
+    public int finger_entry;
+
     [SerializeField]
     private bool[] move_state = new bool[20];
     [SerializeField]

@@ -7,7 +7,8 @@ public class CameraHolder : MonoBehaviour {
     public float horizental_speed= 10.0f;
     public float vertical_speed = 10.0f;
 
-    public float buchang = 5.0f;
+    public bool enable = false;
+    public Vector2 origin_touch_point;
     [SerializeField]
     private float distance;
 	// Use this for initialization
@@ -19,13 +20,15 @@ public class CameraHolder : MonoBehaviour {
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButton(1))
+        /*
+        if (Input.GetMouseButton(0))
         {
             
             //camera_transform.position += new Vector3(0,0, distance);
 
 
-            transform.eulerAngles = new Vector3(Mathf.Clamp(transform.eulerAngles.x - vertical_speed * Input.GetAxisRaw("Mouse Y"),38,85),
+            transform.eulerAngles = 
+                new Vector3(Mathf.Clamp(transform.eulerAngles.x - vertical_speed * Input.GetAxisRaw("Mouse Y"),38,85),
                 transform.eulerAngles.y + vertical_speed * Input.GetAxisRaw("Mouse X"), 0);
         }
     /*
